@@ -14,10 +14,10 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    private EmployeeRepo employeeRepo;
+    EntityManager entityManager;
 
     @Autowired
-    EntityManager entityManager;
+    private EmployeeRepo employeeRepo;
 
     @Override
     public Employee getEmployee(Long id) {
