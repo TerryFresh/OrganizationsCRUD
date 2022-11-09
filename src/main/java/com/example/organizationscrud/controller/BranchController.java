@@ -3,6 +3,7 @@ package com.example.organizationscrud.controller;
 import com.example.organizationscrud.model.Branch;
 import com.example.organizationscrud.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class BranchController {
     }
 
     @PutMapping("/updateBranch")
-    public void updateBranch(@RequestBody Branch branch){
+    public Branch updateBranch(@RequestBody Branch branch){
         branchService.saveBranch(branch);
+        return branchService.getBranch(branch.getId());
     }
 
-    @PostMapping("/deleteBranch/{id}")
+    @DeleteMapping("/deleteBranch/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBranch(@PathVariable(value = "id") Long id){
         branchService.deleteBranch(id);
     }

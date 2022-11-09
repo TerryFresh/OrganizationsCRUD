@@ -3,6 +3,7 @@ package com.example.organizationscrud.controller;
 import com.example.organizationscrud.model.Department;
 import com.example.organizationscrud.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class DepartmentController {
     }
 
     @PutMapping("/updateDepartment")
-    public void updateDepartment(@RequestBody Department department){
+    public Department updateDepartment(@RequestBody Department department){
         departmentService.saveDepartment(department);
+        return departmentService.getDepartment(department.getId());
     }
 
-    @PostMapping("/deleteDepartment/{id}")
+    @DeleteMapping("/deleteDepartment/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDepartment(@PathVariable(value = "id") Long id){
         departmentService.deleteDepartment(id);
     }

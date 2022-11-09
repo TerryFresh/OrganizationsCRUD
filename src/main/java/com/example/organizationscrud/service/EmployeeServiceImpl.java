@@ -6,15 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-
-    @Autowired
-    EntityManager entityManager;
 
     @Autowired
     private EmployeeRepo employeeRepo;
@@ -32,15 +27,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public void saveEmployee(Employee employee) {
-        Employee newEmployee = entityManager.merge(employee);
-        employee.setId(newEmployee.getId());
+        employeeRepo.save(employee);
     }
 
     @Override
     @Transactional
     public void deleteEmployee(Long id) {
-        Query query = entityManager.createQuery("delete from Employee " + "where id =:employeeId");
-        query.setParameter("employeeId", id);
-        query.executeUpdate();
+        employeeRepo.deleteById(id);
     }
 }

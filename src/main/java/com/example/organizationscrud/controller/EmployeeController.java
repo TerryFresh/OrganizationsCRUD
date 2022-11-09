@@ -3,6 +3,7 @@ package com.example.organizationscrud.controller;
 import com.example.organizationscrud.model.Employee;
 import com.example.organizationscrud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class EmployeeController {
     }
 
     @PutMapping("/updateEmployee")
-    public void updateEmployee(@RequestBody Employee employee){
+    public Employee updateEmployee(@RequestBody Employee employee){
         employeeService.saveEmployee(employee);
+        return employeeService.getEmployee(employee.getId());
     }
 
-    @PostMapping("/deleteEmployee/{id}")
+    @DeleteMapping("/deleteEmployee/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable(value = "id") Long id){
         employeeService.deleteEmployee(id);
     }

@@ -3,6 +3,7 @@ package com.example.organizationscrud.controller;
 import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,13 +31,14 @@ public class OrganizationController {
     }
 
     @PutMapping("/updateOrganization")
-    public void updateOrganization(@RequestBody Organization organization){
+    public Organization updateOrganization(@RequestBody Organization organization){
         organizationService.saveOrganization(organization);
+        return organizationService.getOrganization(organization.getId());
     }
 
-    @PostMapping("/deleteOrganization/{id}")
+    @DeleteMapping("/deleteOrganization/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrganization(@PathVariable(value = "id") Long id){
         organizationService.deleteOrganization(id);
     }
-
 }

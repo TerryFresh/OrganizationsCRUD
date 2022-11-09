@@ -3,6 +3,7 @@ package com.example.organizationscrud.controller;
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.service.CartelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class CartelController {
     }
 
     @PutMapping("/updateCartel")
-    public void updateCartel(@RequestBody Cartel cartel){
+    public Cartel updateCartel(@RequestBody Cartel cartel){
         cartelService.saveCartel(cartel);
+        return cartelService.getCartel(cartel.getId());
     }
 
-    @PostMapping("/deleteCartel/{id}")
+    @DeleteMapping("/deleteCartel/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCartel(@PathVariable(value = "id") Long id){
         cartelService.deleteCartel(id);
     }

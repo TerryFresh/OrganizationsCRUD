@@ -6,15 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 @Service
 public class BranchServiceImpl implements BranchService{
-
-    @Autowired
-    EntityManager entityManager;
 
     @Autowired
     BranchRepo branchRepo;
@@ -32,15 +27,12 @@ public class BranchServiceImpl implements BranchService{
     @Override
     @Transactional
     public void saveBranch(Branch branch) {
-        Branch newBranch = entityManager.merge(branch);
-        branchRepo.save(newBranch);
+        branchRepo.save(branch);
     }
 
     @Override
     @Transactional
     public void deleteBranch(Long id) {
-        Query query = entityManager.createQuery("delete from Branch " + "where id =:branchId");
-        query.setParameter("branchId", id);
-        query.executeUpdate();
+        branchRepo.deleteById(id);
     }
 }
