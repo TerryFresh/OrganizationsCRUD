@@ -1,5 +1,6 @@
 package com.example.organizationscrud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class Cartel {
     private String name;
 
     //кто с кем объединяется
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "organization_cartel",

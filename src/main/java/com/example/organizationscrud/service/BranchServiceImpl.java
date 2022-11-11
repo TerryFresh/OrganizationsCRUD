@@ -12,6 +12,8 @@ import java.util.List;
 public class BranchServiceImpl implements BranchService{
 
     @Autowired
+    OrganizationService organizationService;
+    @Autowired
     BranchRepo branchRepo;
 
     @Override
@@ -27,6 +29,9 @@ public class BranchServiceImpl implements BranchService{
     @Override
     @Transactional
     public void saveBranch(Branch branch) {
+        if (organizationService.getOrganization(branch.getOrganization().getId()) != null) {
+            branch.setOrganization(organizationService.getOrganization(branch.getOrganization().getId()));
+        }
         branchRepo.save(branch);
     }
 

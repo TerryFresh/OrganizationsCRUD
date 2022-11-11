@@ -1,5 +1,6 @@
 package com.example.organizationscrud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class Branch {
     private Organization organization;
 
     //Какие депы в филлиале
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "branch",
             fetch = FetchType.LAZY)

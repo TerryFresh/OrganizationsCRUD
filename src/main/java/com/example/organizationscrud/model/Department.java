@@ -1,6 +1,6 @@
 package com.example.organizationscrud.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,12 +22,8 @@ public class Department {
     //имя депа
     private String name;
 
-    //кому будет принадлежать деп (можно null)
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="parent_department_id")
-    private Department parentDeparment;
-
     //работники депа
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "department",
             fetch = FetchType.LAZY)
@@ -38,16 +34,22 @@ public class Department {
     @JoinColumn(name="head_employee_id")
     private Employee employeeHead;
 
+    //кому будет принадлежать деп (можно null)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="parent_department_id")
+    private Department parentDepartment;
+
     //депы в подчинение
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "parentDeparment",
+            mappedBy = "parentDepartment",
             fetch = FetchType.LAZY)
     private List<Department> subDepartments;
 
-    //в какой организации деп
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="organization_id")
     private Organization organization;
+
 
     //к какому филлиалу относится деп (можно null)
     @ManyToOne(cascade = CascadeType.ALL)

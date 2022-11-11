@@ -30,8 +30,8 @@ public class CartelController {
         cartelService.saveCartel(cartel);
     }
 
-    @PutMapping("/updateCartel")
-    public Cartel updateCartel(@RequestBody Cartel cartel){
+    @PutMapping("/updateCartel/{id}")
+    public Cartel updateCartel(@RequestBody Cartel cartel, @PathVariable Long id){
         cartelService.saveCartel(cartel);
         return cartelService.getCartel(cartel.getId());
     }

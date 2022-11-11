@@ -30,8 +30,8 @@ public class OrganizationController {
         organizationService.saveOrganization(organization);
     }
 
-    @PutMapping("/updateOrganization")
-    public Organization updateOrganization(@RequestBody Organization organization){
+    @PutMapping("/updateOrganization/{id}")
+    public Organization updateOrganization(@RequestBody Organization organization, @PathVariable Long id){
         organizationService.saveOrganization(organization);
         return organizationService.getOrganization(organization.getId());
     }
