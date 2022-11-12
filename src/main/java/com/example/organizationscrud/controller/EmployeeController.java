@@ -15,7 +15,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/showEmployee/{id}")
+    @GetMapping("/getEmployee/{id}")
     public Employee showEmployee(@PathVariable(value = "id") Long id){
         return employeeService.getEmployee(id);
     }

@@ -1,7 +1,6 @@
 package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Department;
-import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +16,8 @@ public class DepartmentController {
     DepartmentService departmentService;
 
     @GetMapping("/getDepartment/{id}")
-    public Organization showEmployee(@PathVariable(value = "id") Long id){
-        return departmentService.getDepartment(id).getOrganization();
+    public Department showEmployee(@PathVariable(value = "id") Long id){
+        return departmentService.getDepartment(id);
     }
 
     @GetMapping("/showAllDepartment")

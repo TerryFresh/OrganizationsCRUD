@@ -1,6 +1,6 @@
 package com.example.organizationscrud.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,28 +20,22 @@ public class Organization {
 
     private String name;
 
-    //кто с кем объединяется
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "organization_cartel",
-            joinColumns = @JoinColumn(name="organization_id"),
-            inverseJoinColumns = @JoinColumn(name="cartel_id"))
-    private List<Cartel> cartel;
+    @JsonBackReference(value = "organization-cartel")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "cartel_id")
+    private Cartel cartel;
 
-    //Какие филлиалы имеются
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.MERGE,
+    @JsonManagedReference(value = "organization-branch")
+    @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "organization",
             fetch = FetchType.LAZY)
     private List<Branch> branch;
 
-    //депы в подчинение
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,
+    @JsonManagedReference(value = "organization-department")
+    @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "organization",
             fetch = FetchType.LAZY)
-    private List<Department> subDepartments;
+    private List<Department> department;
 
 }
 

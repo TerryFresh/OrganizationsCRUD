@@ -1,6 +1,6 @@
 package com.example.organizationscrud.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,15 +18,11 @@ public class Cartel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //название картеля
     private String name;
 
-    //кто с кем объединяется
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "organization_cartel",
-            joinColumns = @JoinColumn(name="cartel_id"),
-            inverseJoinColumns = @JoinColumn(name="organization_id"))
+    @JsonManagedReference(value = "organization-cartel")
+    @OneToMany(cascade = CascadeType.PERSIST,
+            mappedBy = "cartel",
+            fetch = FetchType.LAZY)
     private List<Organization> organization;
 }

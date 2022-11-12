@@ -1,5 +1,7 @@
 package com.example.organizationscrud.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,19 +22,19 @@ public class Employee {
 
     private String secondName;
 
-    //в какой орге раб
-    @ManyToOne
-    @JoinColumn(name="organization_id")
-    private Organization organization;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "head_department_id")
+    private Department headOfDepartment;
 
-    //в каком депе раб
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="department_id")
+    @JsonBackReference(value = "department-employeeOfDepartment")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "department_id")
     private Department department;
 
-    //является ли главой депа (можно null)
-    @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name="head_department_id")
-    private Department headOfDepartment;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 
 }

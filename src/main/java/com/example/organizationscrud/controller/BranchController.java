@@ -31,7 +31,7 @@ public class BranchController {
     }
 
     @PutMapping("/updateBranch/{id}")
-    public Branch updateBranch(@RequestBody Branch branch, @PathVariable Long id){
+    public Branch updateBranch(@RequestBody Branch branch){
         branchService.saveBranch(branch);
         return branchService.getBranch(branch.getId());
     }
