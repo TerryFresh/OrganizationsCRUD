@@ -31,9 +31,8 @@ public class OrganizationController {
     }
 
     @PutMapping("/updateOrganization/{id}")
-    public Organization updateOrganization(@RequestBody Organization organization, @PathVariable Long id){
+    public void updateOrganization(@RequestBody Organization organization, @PathVariable Long id){
         organizationService.saveOrganization(organization);
-        return organizationService.getOrganization(organization.getId());
     }
 
     @DeleteMapping("/deleteOrganization/{id}")

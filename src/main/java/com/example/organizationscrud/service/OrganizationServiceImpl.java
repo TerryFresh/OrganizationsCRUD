@@ -1,5 +1,6 @@
 package com.example.organizationscrud.service;
 
+import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.repo.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,14 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public void saveOrganization(Organization organization) {
         organizationRepo.save(organization);
+    }
+
+    @Override
+    @Transactional
+    public void updateOrganization(Organization organization, Long id) {
+        Organization newOrganization = organizationRepo.findById(id).orElseThrow();
+        newOrganization.setName(organization.getName());
+        organizationRepo.save(newOrganization);
     }
 
     @Override

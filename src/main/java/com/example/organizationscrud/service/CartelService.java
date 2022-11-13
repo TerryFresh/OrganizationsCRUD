@@ -12,5 +12,7 @@ public interface CartelService{
 
     public void saveCartel(Cartel cartel);
 
+    public void updateCartel(Cartel cartel, Long id);
+
     public void deleteCartel(Long id);
 }

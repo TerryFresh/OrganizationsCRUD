@@ -31,9 +31,8 @@ public class CartelController {
     }
 
     @PutMapping("/updateCartel/{id}")
-    public Cartel updateCartel(@RequestBody Cartel cartel, @PathVariable Long id){
-        cartelService.saveCartel(cartel);
-        return cartelService.getCartel(cartel.getId());
+    public void updateCartel(@RequestBody Cartel cartel, @PathVariable Long id){
+        cartelService.updateCartel(cartel, id);
     }
 
     @DeleteMapping("/deleteCartel/{id}")

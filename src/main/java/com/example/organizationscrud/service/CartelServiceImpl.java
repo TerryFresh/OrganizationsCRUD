@@ -1,5 +1,6 @@
 package com.example.organizationscrud.service;
 
+import com.example.organizationscrud.model.Branch;
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.repo.CartelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,14 @@ public class CartelServiceImpl implements CartelService {
     @Transactional
     public void saveCartel(Cartel cartel) {
         cartelRepo.save(cartel);
+    }
+
+    @Override
+    @Transactional
+    public void updateCartel(Cartel cartel, Long id) {
+        Cartel newCartel = cartelRepo.findById(id).orElseThrow();
+        newCartel.setName(cartel.getName());
+        cartelRepo.save(newCartel);
     }
 
     @Override

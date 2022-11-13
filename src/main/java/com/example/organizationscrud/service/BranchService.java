@@ -12,5 +12,10 @@ public interface BranchService {
 
     public void saveBranch(Branch branch);
 
+    public void  updateBranch(Branch branch, Long id);
+
     public void deleteBranch(Long id);
+
+
+
 }

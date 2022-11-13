@@ -1,5 +1,6 @@
 package com.example.organizationscrud.service;
 
+import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Department;
 import com.example.organizationscrud.repo.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,14 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Transactional
     public void saveDepartment(Department department) {
         departmentRepo.save(department);
+    }
+
+    @Override
+    @Transactional
+    public void updateDepartment(Department department, Long id) {
+        Department newDepartment = departmentRepo.findById(id).orElseThrow();
+        newDepartment.setName(department.getName());
+        departmentRepo.save(newDepartment);
     }
 
     @Override

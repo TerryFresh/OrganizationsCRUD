@@ -31,9 +31,8 @@ public class EmployeeController {
     }
 
     @PutMapping("/updateEmployee/{id}")
-    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable Long id){
+    public void updateEmployee(@RequestBody Employee employee, @PathVariable Long id){
         employeeService.saveEmployee(employee);
-        return employeeService.getEmployee(employee.getId());
     }
 
     @DeleteMapping("/deleteEmployee/{id}")

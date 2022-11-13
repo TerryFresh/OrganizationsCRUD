@@ -29,10 +29,15 @@ public class BranchServiceImpl implements BranchService{
     @Override
     @Transactional
     public void saveBranch(Branch branch) {
-//        if (branch.getOrganization().getId() != null) {
-//            branch.setOrganization(organizationService.getOrganization(branch.getOrganization().getId()));
-//        }
         branchRepo.save(branch);
+    }
+
+    @Override
+    @Transactional
+    public void updateBranch(Branch branch, Long id) {
+        Branch newBranch = branchRepo.findById(id).orElseThrow();
+        newBranch.setName(branch.getName());
+        branchRepo.save(newBranch);
     }
 
     @Override
