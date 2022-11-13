@@ -1,7 +1,9 @@
 package com.example.organizationscrud.service;
 
 import com.example.organizationscrud.model.Branch;
+import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.repo.BranchRepo;
+import com.example.organizationscrud.repo.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,9 +14,10 @@ import java.util.List;
 public class BranchServiceImpl implements BranchService{
 
     @Autowired
-    OrganizationService organizationService;
-    @Autowired
     BranchRepo branchRepo;
+
+    @Autowired
+    OrganizationRepo organizationRepo;
 
     @Override
     public Branch getBranch(Long id) {
@@ -44,5 +47,12 @@ public class BranchServiceImpl implements BranchService{
     @Transactional
     public void deleteBranch(Long id) {
         branchRepo.deleteById(id);
+    }
+
+    @Override
+    public void setBranchInOrganization(Long branchId, Long organizationId) {
+        Branch branch = branchRepo.findById(branchId).orElseThrow();
+        branch.setOrganization(organizationRepo.findById(organizationId).orElseThrow());
+        branchRepo.save(branch);
     }
 }

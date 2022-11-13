@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -39,7 +40,7 @@ public class Department {
 
     @JsonBackReference(value = "subDepartments-parentDepartment")
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "parent_department_id")
+    @JoinColumn(name = "parent_department_id")        //не факт что нужна эта строчка
     private Department parentDepartment;
 
     @JsonBackReference(value = "organization-department")

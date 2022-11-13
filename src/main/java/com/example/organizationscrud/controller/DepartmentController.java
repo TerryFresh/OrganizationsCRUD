@@ -32,12 +32,33 @@ public class DepartmentController {
 
     @PutMapping("/updateDepartment/{id}")
     public void updateDepartment(@RequestBody Department department, @PathVariable Long id){
-        departmentService.saveDepartment(department);
+        departmentService.updateDepartment(department, id);
     }
 
     @DeleteMapping("/deleteDepartment/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDepartment(@PathVariable(value = "id") Long id){
         departmentService.deleteDepartment(id);
+    }
+
+    @PutMapping("/setDepartmentInOrganization")
+    public void setDepartmentInOrganization(@RequestParam Long departmentId, @RequestParam Long organizationId){
+        departmentService.setDepartmentInOrganization(departmentId, organizationId);
+    }
+
+    @PutMapping("/setDepartmentInBranch")
+    public void setDepartmentInBranch(@RequestParam Long departmentId, @RequestParam Long branchId){
+        departmentService.setDepartmentInBranch(departmentId, branchId);
+    }
+
+    @PutMapping("/setSubDepartmentInDepartment")
+    public void setSubDepartmentInDepartment(@RequestParam Long subDepartmentId, @RequestParam Long departmentId){
+        departmentService.setSubDepartmentInDepartment(subDepartmentId, departmentId);
+    }
+
+    @PutMapping("/setEmployeeHeadOfDepartment")
+    public void setEmployeeHeadOfDepartment(@RequestParam Long employeeId, @RequestParam Long departmentId){
+        departmentService.setEmployeeHeadOfDepartment(employeeId, departmentId);
+        //Есть баг задваивает pkey id (в бд не отображается, в постмане выдаёт ошибку больше 1 значения с таким id) <- пофиксить
     }
 }

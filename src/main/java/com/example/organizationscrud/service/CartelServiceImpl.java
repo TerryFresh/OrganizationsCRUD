@@ -3,6 +3,7 @@ package com.example.organizationscrud.service;
 import com.example.organizationscrud.model.Branch;
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.repo.CartelRepo;
+import com.example.organizationscrud.repo.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,4 +45,5 @@ public class CartelServiceImpl implements CartelService {
     public void deleteCartel(Long id) {
         cartelRepo.deleteById(id);
     }
+
 }

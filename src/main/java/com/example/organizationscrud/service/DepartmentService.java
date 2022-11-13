@@ -16,7 +16,14 @@ public interface DepartmentService {
 
     public void  updateDepartment(Department department, Long id);
 
-
     public void deleteDepartment(Long id);
+
+    public void setDepartmentInOrganization(Long departmentId, Long organizationId);
+
+    public void setDepartmentInBranch(Long departmentId, Long branchId);
+
+    public void setSubDepartmentInDepartment(Long subDepartmentId, Long departmentId);
+
+    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId);
 
 }

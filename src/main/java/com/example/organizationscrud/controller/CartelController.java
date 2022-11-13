@@ -40,4 +40,5 @@ public class CartelController {
     public void deleteCartel(@PathVariable(value = "id") Long id){
         cartelService.deleteCartel(id);
     }
+
 }

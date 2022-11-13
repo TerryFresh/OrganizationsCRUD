@@ -16,6 +16,5 @@ public interface BranchService {
 
     public void deleteBranch(Long id);
 
-
-
+    public void setBranchInOrganization(Long branchId, Long organizationId);
 }

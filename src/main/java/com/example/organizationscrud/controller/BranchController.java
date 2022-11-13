@@ -40,4 +40,9 @@ public class BranchController {
     public void deleteBranch(@PathVariable(value = "id") Long id){
         branchService.deleteBranch(id);
     }
+
+    @PutMapping("/setBranchInOrganization")
+    public void setBranchInOrganization(@RequestParam Long branchId, @RequestParam Long organizationId){
+        branchService.setBranchInOrganization(branchId, organizationId);
+    }
 }

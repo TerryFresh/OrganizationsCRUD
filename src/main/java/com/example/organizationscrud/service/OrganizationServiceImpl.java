@@ -2,6 +2,7 @@ package com.example.organizationscrud.service;
 
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Organization;
+import com.example.organizationscrud.repo.CartelRepo;
 import com.example.organizationscrud.repo.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     OrganizationRepo organizationRepo;
+
+    @Autowired
+    CartelRepo cartelRepo;
 
     @Override
     public Organization getOrganization(Long id) {
@@ -44,4 +48,13 @@ public class OrganizationServiceImpl implements OrganizationService {
     public void deleteOrganization(Long id) {
         organizationRepo.deleteById(id);
     }
+
+    @Override
+    public void setOrganizationInCartel(Long cartelId, Long organizationId) {
+        Organization organization = organizationRepo.findById(organizationId).orElseThrow();
+        organization.setCartel(cartelRepo.findById(cartelId).orElseThrow());
+        organizationRepo.save(organization);
+    }
+
+
 }

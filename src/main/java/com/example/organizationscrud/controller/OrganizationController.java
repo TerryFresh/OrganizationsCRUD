@@ -1,6 +1,7 @@
 package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Organization;
+import com.example.organizationscrud.service.CartelService;
 import com.example.organizationscrud.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,9 @@ public class OrganizationController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private CartelService cartelService;
 
     @GetMapping("/getOrganization/{id}")
     public Organization getOrganization(@PathVariable(value = "id") Long id){
@@ -39,5 +43,10 @@ public class OrganizationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrganization(@PathVariable(value = "id") Long id){
         organizationService.deleteOrganization(id);
+    }
+
+    @PutMapping("/setOrganizationInCartel")
+    public void setOrganizationInCartel(@RequestParam Long cartelId, @RequestParam Long organizationId){
+        organizationService.setOrganizationInCartel(cartelId, organizationId);
     }
 }

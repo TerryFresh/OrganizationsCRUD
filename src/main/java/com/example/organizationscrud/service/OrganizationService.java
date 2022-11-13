@@ -16,4 +16,6 @@ public interface OrganizationService {
     public void  updateOrganization(Organization organization, Long id);
 
     public void deleteOrganization(Long id);
+
+    public void setOrganizationInCartel(Long cartelId, Long organizationId);
 }
