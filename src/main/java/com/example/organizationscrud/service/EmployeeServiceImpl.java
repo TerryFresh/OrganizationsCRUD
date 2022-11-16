@@ -61,14 +61,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void setDisableHeadOfDepartment(Long departmentId) {
-        Employee employee = employeeRepo.findById(departmentRepo.findById(departmentId).orElseThrow().getEmployeeHead().getId()).orElseThrow();
-        employee.setHeadOfDepartment(null);
-        employeeRepo.save(employee);
+        try {
+            Employee employee = employeeRepo.findById(departmentRepo.findById(departmentId).orElseThrow().getEmployeeHead().getId()).orElseThrow();
+            employee.setHeadOfDepartment(null);
+            departmentRepo.findById(departmentId).orElseThrow().setEmployeeHead(null);
+            employeeRepo.save(employee);
+        } catch (NullPointerException e){
+            e.getMessage();
+        }
     }
 
     @Override
     public void setEmployeeInDepartment(Long employeeId, Long departmentId) {
         Employee employee = employeeRepo.findById(employeeId).orElseThrow();
+        if (employee.getHeadOfDepartment() != null){
+            setDisableHeadOfDepartment(employee.getDepartment().getId());
+        }
         employee.setDepartment(departmentRepo.findById(departmentId).orElseThrow());
         employee.setOrganization(departmentRepo.findById(departmentId).orElseThrow().getOrganization());
         employeeRepo.save(employee);
@@ -78,6 +86,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void setEmployeeChangedDepartment(Long employeeId, Long departmentId) {
         Employee employee = employeeRepo.findById(employeeId).orElseThrow();
         if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(employee.getOrganization())) {
+            if (employee.getHeadOfDepartment() != null){
+                setDisableHeadOfDepartment(employee.getDepartment().getId());
+            }
             employee.setDepartment(departmentRepo.findById(departmentId).orElseThrow());
             employeeRepo.save(employee);
         } else throw new RuntimeException(); //Поменять на нормальную ошибку

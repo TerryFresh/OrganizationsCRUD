@@ -32,7 +32,7 @@ public class EmployeeController {
 
     @PutMapping("/updateEmployee/{id}")
     public void updateEmployee(@RequestBody Employee employee, @PathVariable Long id){
-        employeeService.saveEmployee(employee);
+        employeeService.updateEmployee(employee, id);
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
@@ -45,7 +45,6 @@ public class EmployeeController {
     @PutMapping("/setEmployeeHeadOfDepartment/{id}")
     public void setEmployeeHeadOfDepartment(@PathVariable Long id){
         employeeService.setEmployeeHeadOfDepartment(id);
-        //Есть баг задваивает pkey id (в бд не отображается, в постмане выдаёт ошибку больше 1 значения с таким id) <- пофиксить
     }
 
     @PutMapping("/setDisableHeadOfDepartment/{id}")
@@ -53,13 +52,13 @@ public class EmployeeController {
         employeeService.setDisableHeadOfDepartment(id);
     }
 
-    @PutMapping("/setEmployeeInDepartment")
-    public void setEmployeeInDepartment(@RequestParam Long employeeId, @RequestParam Long departmentId){
+    @PutMapping("/setEmployeeInDepartment/{employeeId}")
+    public void setEmployeeInDepartment(@PathVariable Long employeeId, @RequestParam Long departmentId){
         employeeService.setEmployeeInDepartment(employeeId, departmentId);
     }
 
-    @PutMapping("/setEmployeeChangedDepartment")
-    public void setEmployeeChangedDepartment(@RequestParam Long employeeId, @RequestParam Long departmentId){
+    @PutMapping("/setEmployeeChangedDepartment/{employeeId}")
+    public void setEmployeeChangedDepartment(@PathVariable Long employeeId, @RequestParam Long departmentId){
         employeeService.setEmployeeChangedDepartment(employeeId, departmentId);
     }
 }
