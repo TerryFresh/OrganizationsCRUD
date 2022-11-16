@@ -79,11 +79,4 @@ public class DepartmentServiceImpl implements DepartmentService{
         subDepartment.setParentDepartment(departmentRepo.findById(departmentId).orElseThrow());
         departmentRepo.save(subDepartment);
     }
-
-    @Override
-    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId) {
-        Employee employee = employeeRepo.findById(employeeId).orElseThrow();
-        employee.setHeadOfDepartment(departmentRepo.findById(departmentId).orElseThrow());
-        employeeRepo.save(employee);
-    }
 }

@@ -24,6 +24,4 @@ public interface DepartmentService {
 
     public void setSubDepartmentInDepartment(Long subDepartmentId, Long departmentId);
 
-    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId);
-
 }

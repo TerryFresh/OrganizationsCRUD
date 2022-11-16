@@ -15,5 +15,4 @@ public interface CartelService{
     public void updateCartel(Cartel cartel, Long id);
 
     public void deleteCartel(Long id);
-
 }

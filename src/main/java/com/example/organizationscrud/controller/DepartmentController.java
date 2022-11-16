@@ -56,9 +56,4 @@ public class DepartmentController {
         departmentService.setSubDepartmentInDepartment(subDepartmentId, departmentId);
     }
 
-    @PutMapping("/setEmployeeHeadOfDepartment")
-    public void setEmployeeHeadOfDepartment(@RequestParam Long employeeId, @RequestParam Long departmentId){
-        departmentService.setEmployeeHeadOfDepartment(employeeId, departmentId);
-        //Есть баг задваивает pkey id (в бд не отображается, в постмане выдаёт ошибку больше 1 значения с таким id) <- пофиксить
-    }
 }

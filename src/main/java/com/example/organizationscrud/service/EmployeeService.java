@@ -15,4 +15,10 @@ public interface EmployeeService {
     public void  updateEmployee(Employee employee, Long id);
 
     public void deleteEmployee(Long id);
+
+    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId);
+
+    public  void setEmployeeInDepartment(Long employeeId, Long departmentId);
+
+    public void setEmployeeChangedDepartment(Long employeeId, Long departmentId);
 }

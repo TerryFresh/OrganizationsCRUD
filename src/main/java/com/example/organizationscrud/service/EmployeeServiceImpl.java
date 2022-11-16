@@ -2,6 +2,7 @@ package com.example.organizationscrud.service;
 
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Employee;
+import com.example.organizationscrud.repo.DepartmentRepo;
 import com.example.organizationscrud.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepo employeeRepo;
+
+    @Autowired
+    private DepartmentRepo departmentRepo;
 
     @Override
     public Employee getEmployee(Long id) {
@@ -44,5 +48,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void deleteEmployee(Long id) {
         employeeRepo.deleteById(id);
+    }
+
+    @Override
+    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId) {
+        Employee employee = employeeRepo.findById(employeeId).orElseThrow();
+        employee.setHeadOfDepartment(departmentRepo.findById(departmentId).orElseThrow());
+        employeeRepo.save(employee);
+    }
+
+    @Override
+    public void setEmployeeInDepartment(Long employeeId, Long departmentId) {
+        Employee employee = employeeRepo.findById(employeeId).orElseThrow();
+        employee.setDepartment(departmentRepo.findById(departmentId).orElseThrow());
+        employee.setOrganization(departmentRepo.findById(departmentId).orElseThrow().getOrganization());
+        employeeRepo.save(employee);
+    }
+
+    @Override
+    public void setEmployeeChangedDepartment(Long employeeId, Long departmentId) {
+        Employee employee = employeeRepo.findById(employeeId).orElseThrow();
+        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(employee.getOrganization())){
+            employee.setDepartment(departmentRepo.findById(departmentId).orElseThrow());
+            employeeRepo.save(employee);
+        }else throw new RuntimeException(); //Поменять на нормальную ошибку
     }
 }
