@@ -51,9 +51,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId) {
+    public void setEmployeeHeadOfDepartment(Long employeeId) {
         Employee employee = employeeRepo.findById(employeeId).orElseThrow();
-        employee.setHeadOfDepartment(departmentRepo.findById(departmentId).orElseThrow());
+        setDisableHeadOfDepartment(employee.getDepartment().getId());
+        employee.setHeadOfDepartment(employee.getDepartment());
+        departmentRepo.findById(employee.getDepartment().getId()).orElseThrow().setEmployeeHead(employee);
+        employeeRepo.save(employee);
+    }
+
+    @Override
+    public void setDisableHeadOfDepartment(Long departmentId) {
+        Employee employee = employeeRepo.findById(departmentRepo.findById(departmentId).orElseThrow().getEmployeeHead().getId()).orElseThrow();
+        employee.setHeadOfDepartment(null);
         employeeRepo.save(employee);
     }
 
@@ -68,9 +77,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void setEmployeeChangedDepartment(Long employeeId, Long departmentId) {
         Employee employee = employeeRepo.findById(employeeId).orElseThrow();
-        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(employee.getOrganization())){
+        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(employee.getOrganization())) {
             employee.setDepartment(departmentRepo.findById(departmentId).orElseThrow());
             employeeRepo.save(employee);
-        }else throw new RuntimeException(); //Поменять на нормальную ошибку
+        } else throw new RuntimeException(); //Поменять на нормальную ошибку
     }
 }

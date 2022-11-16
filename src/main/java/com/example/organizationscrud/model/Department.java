@@ -23,7 +23,8 @@ public class Department {
 
     private String name;
 
-    @OneToOne(mappedBy = "headOfDepartment")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "employee_head_id")
     private Employee employeeHead;
 
     @JsonManagedReference(value = "department-employeeOfDepartment")

@@ -42,10 +42,15 @@ public class EmployeeController {
     }
 
 
-    @PutMapping("/setEmployeeHeadOfDepartment")
-    public void setEmployeeHeadOfDepartment(@RequestParam Long employeeId, @RequestParam Long departmentId){
-        employeeService.setEmployeeHeadOfDepartment(employeeId, departmentId);
+    @PutMapping("/setEmployeeHeadOfDepartment/{id}")
+    public void setEmployeeHeadOfDepartment(@PathVariable Long id){
+        employeeService.setEmployeeHeadOfDepartment(id);
         //Есть баг задваивает pkey id (в бд не отображается, в постмане выдаёт ошибку больше 1 значения с таким id) <- пофиксить
+    }
+
+    @PutMapping("/setDisableHeadOfDepartment/{id}")
+    public void setDisableHeadOfDepartment(@PathVariable Long id){
+        employeeService.setDisableHeadOfDepartment(id);
     }
 
     @PutMapping("/setEmployeeInDepartment")

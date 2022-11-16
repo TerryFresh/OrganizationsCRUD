@@ -16,7 +16,9 @@ public interface EmployeeService {
 
     public void deleteEmployee(Long id);
 
-    public void setEmployeeHeadOfDepartment(Long employeeId, Long departmentId);
+    public void setEmployeeHeadOfDepartment(Long employeeId);
+
+    public void setDisableHeadOfDepartment(Long departmentId);
 
     public  void setEmployeeInDepartment(Long employeeId, Long departmentId);
 
