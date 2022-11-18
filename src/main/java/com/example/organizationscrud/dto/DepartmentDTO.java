@@ -23,5 +23,5 @@ public class DepartmentDTO {
 
     private Long employeeHead;
 
-    private Branch branch;
+    private String branch;
 }

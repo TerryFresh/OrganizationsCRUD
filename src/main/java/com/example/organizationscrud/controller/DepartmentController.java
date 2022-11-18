@@ -41,18 +41,23 @@ public class DepartmentController {
         departmentService.deleteDepartment(id);
     }
 
-    @PutMapping("/setDepartmentInOrganization")
-    public void setDepartmentInOrganization(@RequestParam Long departmentId, @RequestParam Long organizationId){
+    @PutMapping("/setDepartmentInOrganization/{departmentId}")
+    public void setDepartmentInOrganization(@PathVariable Long departmentId, @RequestParam Long organizationId){
         departmentService.setDepartmentInOrganization(departmentId, organizationId);
     }
 
-    @PutMapping("/setDepartmentInBranch")
-    public void setDepartmentInBranch(@RequestParam Long departmentId, @RequestParam Long branchId){
+    @PutMapping("/setDepartmentInBranch/{departmentId}")
+    public void setDepartmentInBranch(@PathVariable Long departmentId, @RequestParam Long branchId){
         departmentService.setDepartmentInBranch(departmentId, branchId);
     }
 
-    @PutMapping("/setSubDepartmentInDepartment")
-    public void setSubDepartmentInDepartment(@RequestParam Long subDepartmentId, @RequestParam Long departmentId){
+    @PutMapping("/setDisableDepartmentBranch/{departmentId}")
+    public void setDisableDepartmentBranch(@PathVariable Long departmentId){
+        departmentService.setDisableDepartmentBranch(departmentId);
+    }
+
+    @PutMapping("/setSubDepartmentInDepartment/{subDepartmentId}")
+    public void setSubDepartmentInDepartment(@PathVariable Long subDepartmentId, @RequestParam Long departmentId){
         departmentService.setSubDepartmentInDepartment(subDepartmentId, departmentId);
     }
 

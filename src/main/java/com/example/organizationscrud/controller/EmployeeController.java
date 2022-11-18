@@ -1,6 +1,7 @@
 package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Employee;
+import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

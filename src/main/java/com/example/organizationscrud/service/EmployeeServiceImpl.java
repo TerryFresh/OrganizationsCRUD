@@ -2,6 +2,7 @@ package com.example.organizationscrud.service;
 
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Employee;
+import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.repo.DepartmentRepo;
 import com.example.organizationscrud.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee newEmployee = employeeRepo.findById(id).orElseThrow();
         newEmployee.setFirstName(employee.getFirstName());
         newEmployee.setSecondName(employee.getSecondName());
-        employeeRepo.save(employee);
+        employeeRepo.save(newEmployee);
     }
 
     @Override

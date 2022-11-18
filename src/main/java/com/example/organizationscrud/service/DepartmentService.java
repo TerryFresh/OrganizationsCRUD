@@ -20,6 +20,8 @@ public interface DepartmentService {
 
     public void setDepartmentInOrganization(Long departmentId, Long organizationId);
 
+    public void setDisableDepartmentBranch(Long departmentId);
+
     public void setDepartmentInBranch(Long departmentId, Long branchId);
 
     public void setSubDepartmentInDepartment(Long subDepartmentId, Long departmentId);

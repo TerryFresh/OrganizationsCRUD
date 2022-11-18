@@ -77,43 +77,42 @@ public class OrganizationServiceImpl implements OrganizationService {
 
         if (employee.getHeadOfDepartment() != null) {
             ArrayList<Department> arrayList = new ArrayList<>(employee.getOrganization().getDepartment());
-            DepartmentDTO departmentDTO = new DepartmentDTO();
             List<Object> list = new ArrayList<>();
-
+            System.out.println(list);
+            list.add(employee.getDepartment());
             for (int i = 0; i < arrayList.size(); i++) {
                 if (!Objects.equals(employee.getDepartment().getId(), arrayList.get(i).getId())) {
+
+                    DepartmentDTO departmentDTO = new DepartmentDTO();
                     departmentDTO.setId(arrayList.get(i).getId());
-                    departmentDTO.setName(arrayList.get(i).getName());
-                    departmentDTO.setEmployeeHead(arrayList.get(i).getEmployeeHead().getId());
-                    departmentDTO.setBranch(arrayList.get(i).getBranch());
+                    try {
+                        departmentDTO.setName(arrayList.get(i).getName());
+                    }catch (NullPointerException ignored){
+
+                    }
+                    try {
+                        departmentDTO.setEmployeeHead(arrayList.get(i).getEmployeeHead().getId());;
+                    }catch (NullPointerException ignored){
+
+                    }
+                    try {
+                        departmentDTO.setBranch(arrayList.get(i).getBranch().getName());;
+                    }catch (NullPointerException ignored){
+
+                    }
                     list.add(departmentDTO);
                 }
             }
-            list.add(employee.getDepartment());
-
             OrganizationDTO organizationDTO = new OrganizationDTO();
             organizationDTO.setId(employee.getOrganization().getId());
             organizationDTO.setName(employee.getOrganization().getName());
             organizationDTO.setDepartment(list);
 
-            String json = objectMapper.writeValueAsString(organizationDTO);
-            return json;
-        } else return objectMapper.writeValueAsString(employee.getDepartment());
+            return objectMapper.writeValueAsString(organizationDTO);
+
+        } else return new Exception().getMessage();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

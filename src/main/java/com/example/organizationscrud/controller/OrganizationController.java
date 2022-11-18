@@ -41,7 +41,7 @@ public class OrganizationController {
 
     @PutMapping("/updateOrganization/{id}")
     public void updateOrganization(@RequestBody Organization organization, @PathVariable Long id){
-        organizationService.saveOrganization(organization);
+        organizationService.updateOrganization(organization, id);
     }
 
     @DeleteMapping("/deleteOrganization/{id}")
@@ -50,8 +50,8 @@ public class OrganizationController {
         organizationService.deleteOrganization(id);
     }
 
-    @PutMapping("/setOrganizationInCartel")
-    public void setOrganizationInCartel(@RequestParam Long cartelId, @RequestParam Long organizationId){
+    @PutMapping("/setOrganizationInCartel/{organizationId}")
+    public void setOrganizationInCartel(@PathVariable Long organizationId, @RequestParam Long cartelId){
         organizationService.setOrganizationInCartel(cartelId, organizationId);
     }
 

@@ -41,8 +41,8 @@ public class BranchController {
         branchService.deleteBranch(id);
     }
 
-    @PutMapping("/setBranchInOrganization")
-    public void setBranchInOrganization(@RequestParam Long branchId, @RequestParam Long organizationId){
+    @PutMapping("/setBranchInOrganization/{branchId}")
+    public void setBranchInOrganization(@PathVariable Long branchId, @RequestParam Long organizationId){
         branchService.setBranchInOrganization(branchId, organizationId);
     }
 }
