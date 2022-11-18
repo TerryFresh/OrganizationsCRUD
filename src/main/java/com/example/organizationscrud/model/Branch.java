@@ -1,10 +1,12 @@
 package com.example.organizationscrud.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@ToString
 public class Branch {
 
     @Id
@@ -30,5 +34,6 @@ public class Branch {
     @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "branch",
             fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Department> department;
 }

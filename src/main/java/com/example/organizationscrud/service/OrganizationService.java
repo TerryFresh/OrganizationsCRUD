@@ -1,8 +1,10 @@
 package com.example.organizationscrud.service;
 
-import com.example.organizationscrud.model.Employee;
 import com.example.organizationscrud.model.Organization;
 
+
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface OrganizationService {
@@ -18,4 +20,7 @@ public interface OrganizationService {
     public void deleteOrganization(Long id);
 
     public void setOrganizationInCartel(Long cartelId, Long organizationId);
+
+    public String getStructureInfoForEmployee(Long employeeId) throws IOException;
+
 }

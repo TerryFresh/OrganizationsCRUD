@@ -14,7 +14,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties()
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@ToString
 public class Department {
 
     @Id
@@ -25,23 +26,27 @@ public class Department {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "employee_head_id")
+    @ToString.Exclude
     private Employee employeeHead;
 
     @JsonManagedReference(value = "department-employeeOfDepartment")
     @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "department",
             fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Employee> employeeOfDepartment;
 
     @JsonManagedReference(value = "subDepartments-parentDepartment")
     @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "parentDepartment",
             fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Department> subDepartments;
 
     @JsonBackReference(value = "subDepartments-parentDepartment")
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "parent_department_id")        //не факт что нужна эта строчка
+    @ToString.Exclude
     private Department parentDepartment;
 
     @JsonBackReference(value = "organization-department")

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Organization {
 
     @Id
@@ -29,12 +32,14 @@ public class Organization {
     @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "organization",
             fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Branch> branch;
 
     @JsonManagedReference(value = "organization-department")
     @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "organization",
             fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Department> department;
 
 }
