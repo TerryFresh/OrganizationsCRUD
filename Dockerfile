@@ -1,6 +1,6 @@
 FROM openjdk
 
-ARG JAR_FILE=target/*.jar
+ARG JAR_FILE=src/main/docker/*.jar
 
 COPY ${JAR_FILE} app.jar
 
