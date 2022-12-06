@@ -1,4 +1,9 @@
-FROM openjdk:17-oracle
-ARG JAR_FILE=*.jar
-COPY ${JAR_FILE} application.jar
-ENTRYPOINT ["java", "-jar", "application.jar"]
+FROM openjdk
+
+ARG JAR_FILE=target/*.jar
+
+COPY ${JAR_FILE} app.jar
+
+EXPOSE 80
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
