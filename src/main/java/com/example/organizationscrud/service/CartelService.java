@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface CartelService{
 
-    public Cartel getCartel(Long id);
+    Cartel getCartel(Long id);
 
-    public List<Cartel> getAllCartel();
+    List<Cartel> getAllCartel();
 
-    public void saveCartel(Cartel cartel);
+    void saveCartel(Cartel cartel);
 
-    public void updateCartel(Cartel cartel, Long id);
+    void updateCartel(Cartel cartel, Long id);
 
-    public void deleteCartel(Long id);
+    void deleteCartel(Long id);
 }

@@ -36,4 +36,5 @@ public class Branch {
             fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Department> department;
+
 }

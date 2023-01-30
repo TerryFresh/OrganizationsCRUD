@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface BranchService {
 
-    public Branch getBranch(Long id);
+    Branch getBranch(Long id);
 
-    public List<Branch> getAllBranch();
+    List<Branch> getAllBranch();
 
-    public void saveBranch(Branch branch);
+    void saveBranch(Branch branch);
 
-    public void  updateBranch(Branch branch, Long id);
+    void  updateBranch(Branch branch, Long id);
 
-    public void deleteBranch(Long id);
+    void deleteBranch(Long id);
 
-    public void setBranchInOrganization(Long branchId, Long organizationId);
+    void setBranchInOrganization(Long branchId, Long organizationId);
 }

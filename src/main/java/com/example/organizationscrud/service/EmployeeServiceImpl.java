@@ -1,11 +1,8 @@
 package com.example.organizationscrud.service;
 
-import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Employee;
-import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.repo.DepartmentRepo;
 import com.example.organizationscrud.repo.EmployeeRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +11,14 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeRepo employeeRepo;
+    private final EmployeeRepo employeeRepo;
 
-    @Autowired
-    private DepartmentRepo departmentRepo;
+    private final DepartmentRepo departmentRepo;
+
+    public EmployeeServiceImpl(EmployeeRepo employeeRepo, DepartmentRepo departmentRepo) {
+        this.employeeRepo = employeeRepo;
+        this.departmentRepo = departmentRepo;
+    }
 
     @Override
     public Employee getEmployee(Long id) {
@@ -46,7 +46,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public void deleteEmployee(Long id) {
         employeeRepo.deleteById(id);
     }

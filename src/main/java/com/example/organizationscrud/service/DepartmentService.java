@@ -8,22 +8,22 @@ import java.util.List;
 
 public interface DepartmentService {
 
-    public Department getDepartment(Long id);
+    Department getDepartment(Long id);
 
-    public List<Department> getAllDepartment();
+    List<Department> getAllDepartment();
 
-    public void saveDepartment(Department department);
+    void saveDepartment(Department department);
 
-    public void  updateDepartment(Department department, Long id);
+    void updateDepartment(Department department, Long id);
 
-    public void deleteDepartment(Long id);
+    void deleteDepartment(Long id);
 
-    public void setDepartmentInOrganization(Long departmentId, Long organizationId);
+    void setDepartmentInOrganization(Long departmentId, Long organizationId);
 
-    public void setDisableDepartmentBranch(Long departmentId);
+    void setDisableDepartmentBranch(Long departmentId);
 
-    public void setDepartmentInBranch(Long departmentId, Long branchId);
+    void setDepartmentInBranch(Long departmentId, Long branchId);
 
-    public void setSubDepartmentInDepartment(Long subDepartmentId, Long departmentId);
+    void setSubDepartmentInDepartment(Long subDepartmentId, Long departmentId);
 
 }

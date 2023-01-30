@@ -1,9 +1,7 @@
 package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Employee;
-import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +11,11 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping("/getEmployee/{id}")
     public Employee showEmployee(@PathVariable(value = "id") Long id){

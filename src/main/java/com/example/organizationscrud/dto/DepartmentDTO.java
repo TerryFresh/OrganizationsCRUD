@@ -1,6 +1,5 @@
 package com.example.organizationscrud.dto;
 
-import com.example.organizationscrud.model.Branch;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

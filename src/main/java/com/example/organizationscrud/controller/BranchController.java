@@ -2,7 +2,6 @@ package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Branch;
 import com.example.organizationscrud.service.BranchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/branch")
 public class BranchController {
 
-    @Autowired
-    BranchService branchService;
+    private final BranchService branchService;
+
+    public BranchController(BranchService branchService) {
+        this.branchService = branchService;
+    }
 
     @GetMapping("/getBranch/{id}")
     public Branch showBranch(@PathVariable(value = "id") Long id){

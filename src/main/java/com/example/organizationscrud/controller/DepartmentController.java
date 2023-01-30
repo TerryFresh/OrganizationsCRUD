@@ -2,7 +2,6 @@ package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Department;
 import com.example.organizationscrud.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/department")
 public class DepartmentController {
 
-    @Autowired
-    DepartmentService departmentService;
+    private final DepartmentService departmentService;
+
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @GetMapping("/getDepartment/{id}")
     public Department showEmployee(@PathVariable(value = "id") Long id){

@@ -1,10 +1,7 @@
 package com.example.organizationscrud.service;
 
-import com.example.organizationscrud.model.Branch;
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.repo.CartelRepo;
-import com.example.organizationscrud.repo.OrganizationRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +10,11 @@ import java.util.List;
 @Service
 public class CartelServiceImpl implements CartelService {
 
-    @Autowired
-    private CartelRepo cartelRepo;
+    private final CartelRepo cartelRepo;
+
+    public CartelServiceImpl(CartelRepo cartelRepo) {
+        this.cartelRepo = cartelRepo;
+    }
 
     @Override
     public Cartel getCartel(Long id) {
@@ -41,7 +41,6 @@ public class CartelServiceImpl implements CartelService {
     }
 
     @Override
-    @Transactional
     public void deleteCartel(Long id) {
         cartelRepo.deleteById(id);
     }

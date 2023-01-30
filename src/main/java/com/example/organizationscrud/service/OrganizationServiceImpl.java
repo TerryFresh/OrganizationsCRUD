@@ -6,11 +6,9 @@ import com.example.organizationscrud.model.Department;
 import com.example.organizationscrud.model.Employee;
 import com.example.organizationscrud.model.Organization;
 import com.example.organizationscrud.repo.CartelRepo;
-import com.example.organizationscrud.repo.DepartmentRepo;
 import com.example.organizationscrud.repo.EmployeeRepo;
 import com.example.organizationscrud.repo.OrganizationRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,17 +18,17 @@ import java.util.*;
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
-    @Autowired
-    OrganizationRepo organizationRepo;
+    private final OrganizationRepo organizationRepo;
 
-    @Autowired
-    CartelRepo cartelRepo;
+    private final CartelRepo cartelRepo;
 
-    @Autowired
-    EmployeeRepo employeeRepo;
+    private final EmployeeRepo employeeRepo;
 
-    @Autowired
-    DepartmentRepo departmentRepo;
+    public OrganizationServiceImpl(OrganizationRepo organizationRepo, CartelRepo cartelRepo, EmployeeRepo employeeRepo) {
+        this.organizationRepo = organizationRepo;
+        this.cartelRepo = cartelRepo;
+        this.employeeRepo = employeeRepo;
+    }
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -59,7 +57,6 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    @Transactional
     public void deleteOrganization(Long id) {
         organizationRepo.deleteById(id);
     }

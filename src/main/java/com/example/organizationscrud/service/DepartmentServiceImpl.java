@@ -3,34 +3,30 @@ package com.example.organizationscrud.service;
 import com.example.organizationscrud.model.*;
 import com.example.organizationscrud.repo.BranchRepo;
 import com.example.organizationscrud.repo.DepartmentRepo;
-import com.example.organizationscrud.repo.EmployeeRepo;
 import com.example.organizationscrud.repo.OrganizationRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
 
-    @Autowired
-    DepartmentRepo departmentRepo;
+    private final DepartmentRepo departmentRepo;
 
-    @Autowired
-    OrganizationRepo organizationRepo;
+    private final OrganizationRepo organizationRepo;
 
-    @Autowired
-    BranchRepo branchRepo;
+    private final BranchRepo branchRepo;
 
-    @Autowired
-    EmployeeRepo employeeRepo;
+    public DepartmentServiceImpl(DepartmentRepo departmentRepo, OrganizationRepo organizationRepo, BranchRepo branchRepo) {
+        this.departmentRepo = departmentRepo;
+        this.organizationRepo = organizationRepo;
+        this.branchRepo = branchRepo;
+    }
 
     @Override
     public Department getDepartment(Long id) {
-        return departmentRepo.findById(id).orElse(null);
+        return departmentRepo.findById(id).orElseThrow();
     }
 
     @Override
@@ -53,7 +49,6 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    @Transactional
     public void deleteDepartment(Long id) {
         departmentRepo.deleteById(id);
     }
@@ -67,7 +62,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public void setDepartmentInBranch(Long departmentId, Long branchId) {
-        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization() == branchRepo.findById(branchId).orElseThrow().getOrganization()){
+        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(branchRepo.findById(branchId).orElseThrow().getOrganization())){
             Department department = departmentRepo.findById(departmentId).orElseThrow();
             department.setBranch(branchRepo.findById(branchId).orElseThrow());
             departmentRepo.save(department);
@@ -83,7 +78,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public void setSubDepartmentInDepartment(Long subDepartmentId, Long departmentId) {
-        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization() == departmentRepo.findById(subDepartmentId).orElseThrow().getOrganization()){
+        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(departmentRepo.findById(subDepartmentId).orElseThrow().getOrganization())){
             Department subDepartment = departmentRepo.findById(subDepartmentId).orElseThrow();
             subDepartment.setParentDepartment(departmentRepo.findById(departmentId).orElseThrow());
             departmentRepo.save(subDepartment);

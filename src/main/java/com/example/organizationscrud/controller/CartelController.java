@@ -2,7 +2,6 @@ package com.example.organizationscrud.controller;
 
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.service.CartelService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/cartel")
 public class CartelController {
 
-    @Autowired
-    CartelService cartelService;
+    private final CartelService cartelService;
+
+    public CartelController(CartelService cartelService) {
+        this.cartelService = cartelService;
+    }
 
     @GetMapping("/getCartel/{id}")
     public Cartel showEmployee(@PathVariable(value = "id") Long id){
