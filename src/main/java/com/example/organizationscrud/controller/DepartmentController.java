@@ -28,13 +28,13 @@ public class DepartmentController {
     }
 
     @PostMapping("/saveDepartment")
-    public void saveDepartment(@RequestBody Department department){
-        departmentService.saveDepartment(department);
+    public Department saveDepartment(@RequestBody Department department){
+        return departmentService.saveDepartment(department);
     }
 
     @PutMapping("/updateDepartment/{id}")
-    public void updateDepartment(@RequestBody Department department, @PathVariable Long id){
-        departmentService.updateDepartment(department, id);
+    public Department updateDepartment(@RequestBody Department department, @PathVariable Long id){
+        return departmentService.updateDepartment(department, id);
     }
 
     @DeleteMapping("/deleteDepartment/{id}")

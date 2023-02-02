@@ -3,6 +3,7 @@ package com.example.organizationscrud.service;
 import com.example.organizationscrud.model.Branch;
 import com.example.organizationscrud.repo.BranchRepo;
 import com.example.organizationscrud.repo.OrganizationRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class BranchServiceImpl implements BranchService{
 
     private final OrganizationRepo organizationRepo;
 
+    @Autowired
     public BranchServiceImpl(BranchRepo branchRepo, OrganizationRepo organizationRepo) {
         this.branchRepo = branchRepo;
         this.organizationRepo = organizationRepo;
@@ -32,16 +34,16 @@ public class BranchServiceImpl implements BranchService{
 
     @Override
     @Transactional
-    public void saveBranch(Branch branch) {
-        branchRepo.save(branch);
+    public Branch saveBranch(Branch branch) {
+        return branchRepo.save(branch);
     }
 
     @Override
     @Transactional
-    public void updateBranch(Branch branch, Long id) {
+    public Branch updateBranch(Branch branch, Long id) {
         Branch newBranch = branchRepo.findById(id).orElseThrow();
         newBranch.setName(branch.getName());
-        branchRepo.save(newBranch);
+        return branchRepo.save(newBranch);
     }
 
     @Override

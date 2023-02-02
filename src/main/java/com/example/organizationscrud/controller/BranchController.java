@@ -28,13 +28,13 @@ public class BranchController {
     }
 
     @PostMapping("/saveBranch")
-    public void saveBranch(@RequestBody Branch branch){
-        branchService.saveBranch(branch);
+    public Branch saveBranch(@RequestBody Branch branch){
+        return branchService.saveBranch(branch);
     }
 
     @PutMapping("/updateBranch/{id}")
-    public void updateBranch(@RequestBody Branch branch, @PathVariable Long id){
-        branchService.updateBranch(branch, id);
+    public Branch updateBranch(@RequestBody Branch branch, @PathVariable Long id){
+        return branchService.updateBranch(branch, id);
     }
 
     @DeleteMapping("/deleteBranch/{id}")

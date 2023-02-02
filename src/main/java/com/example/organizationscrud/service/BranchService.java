@@ -10,9 +10,9 @@ public interface BranchService {
 
     List<Branch> getAllBranch();
 
-    void saveBranch(Branch branch);
+    Branch saveBranch(Branch branch);
 
-    void  updateBranch(Branch branch, Long id);
+    Branch updateBranch(Branch branch, Long id);
 
     void deleteBranch(Long id);
 

@@ -10,9 +10,9 @@ public interface CartelService{
 
     List<Cartel> getAllCartel();
 
-    void saveCartel(Cartel cartel);
+    Cartel saveCartel(Cartel cartel);
 
-    void updateCartel(Cartel cartel, Long id);
+    Cartel updateCartel(Cartel cartel, Long id);
 
     void deleteCartel(Long id);
 }

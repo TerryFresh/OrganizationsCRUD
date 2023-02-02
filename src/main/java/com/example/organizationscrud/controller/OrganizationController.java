@@ -29,13 +29,13 @@ public class OrganizationController {
     }
 
     @PostMapping("/saveOrganization")
-    public void saveOrganization(@RequestBody Organization organization){
-        organizationService.saveOrganization(organization);
+    public Organization saveOrganization(@RequestBody Organization organization){
+        return organizationService.saveOrganization(organization);
     }
 
     @PutMapping("/updateOrganization/{id}")
-    public void updateOrganization(@RequestBody Organization organization, @PathVariable Long id){
-        organizationService.updateOrganization(organization, id);
+    public Organization updateOrganization(@RequestBody Organization organization, @PathVariable Long id){
+        return organizationService.updateOrganization(organization, id);
     }
 
     @DeleteMapping("/deleteOrganization/{id}")

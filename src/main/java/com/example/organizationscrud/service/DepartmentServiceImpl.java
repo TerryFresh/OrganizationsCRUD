@@ -4,6 +4,7 @@ import com.example.organizationscrud.model.*;
 import com.example.organizationscrud.repo.BranchRepo;
 import com.example.organizationscrud.repo.DepartmentRepo;
 import com.example.organizationscrud.repo.OrganizationRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     private final BranchRepo branchRepo;
 
+    @Autowired
     public DepartmentServiceImpl(DepartmentRepo departmentRepo, OrganizationRepo organizationRepo, BranchRepo branchRepo) {
         this.departmentRepo = departmentRepo;
         this.organizationRepo = organizationRepo;
@@ -36,16 +38,16 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     @Transactional
-    public void saveDepartment(Department department) {
-        departmentRepo.save(department);
+    public Department saveDepartment(Department department) {
+        return departmentRepo.save(department);
     }
 
     @Override
     @Transactional
-    public void updateDepartment(Department department, Long id) {
+    public Department updateDepartment(Department department, Long id) {
         Department newDepartment = departmentRepo.findById(id).orElseThrow();
         newDepartment.setName(department.getName());
-        departmentRepo.save(newDepartment);
+        return departmentRepo.save(newDepartment);
     }
 
     @Override
@@ -62,7 +64,8 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public void setDepartmentInBranch(Long departmentId, Long branchId) {
-        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(branchRepo.findById(branchId).orElseThrow().getOrganization())){
+//        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization().equals(branchRepo.findById(branchId).orElseThrow().getOrganization())){
+        if (departmentRepo.findById(departmentId).orElseThrow().getOrganization() == branchRepo.findById(branchId).orElseThrow().getOrganization()){
             Department department = departmentRepo.findById(departmentId).orElseThrow();
             department.setBranch(branchRepo.findById(branchId).orElseThrow());
             departmentRepo.save(department);

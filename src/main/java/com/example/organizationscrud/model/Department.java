@@ -1,10 +1,7 @@
 package com.example.organizationscrud.model;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +13,7 @@ import java.util.List;
 @JsonIgnoreProperties()
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ToString
+@EqualsAndHashCode
 public class Department {
 
     @Id

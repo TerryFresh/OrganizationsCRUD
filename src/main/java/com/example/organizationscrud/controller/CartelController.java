@@ -28,13 +28,13 @@ public class CartelController {
     }
 
     @PostMapping("/saveCartel")
-    public void saveCartel(@RequestBody Cartel cartel){
-        cartelService.saveCartel(cartel);
+    public Cartel saveCartel(@RequestBody Cartel cartel){
+        return cartelService.saveCartel(cartel);
     }
 
     @PutMapping("/updateCartel/{id}")
-    public void updateCartel(@RequestBody Cartel cartel, @PathVariable Long id){
-        cartelService.updateCartel(cartel, id);
+    public Cartel updateCartel(@RequestBody Cartel cartel, @PathVariable Long id){
+        return cartelService.updateCartel(cartel, id);
     }
 
     @DeleteMapping("/deleteCartel/{id}")

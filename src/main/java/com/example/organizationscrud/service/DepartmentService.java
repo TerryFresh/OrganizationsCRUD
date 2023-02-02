@@ -1,8 +1,6 @@
 package com.example.organizationscrud.service;
 
-import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.model.Department;
-import com.example.organizationscrud.model.Organization;
 
 import java.util.List;
 
@@ -12,9 +10,9 @@ public interface DepartmentService {
 
     List<Department> getAllDepartment();
 
-    void saveDepartment(Department department);
+    Department saveDepartment(Department department);
 
-    void updateDepartment(Department department, Long id);
+    Department updateDepartment(Department department, Long id);
 
     void deleteDepartment(Long id);
 

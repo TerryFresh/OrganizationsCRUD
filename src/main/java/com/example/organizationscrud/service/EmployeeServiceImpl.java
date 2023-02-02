@@ -3,6 +3,7 @@ package com.example.organizationscrud.service;
 import com.example.organizationscrud.model.Employee;
 import com.example.organizationscrud.repo.DepartmentRepo;
 import com.example.organizationscrud.repo.EmployeeRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final DepartmentRepo departmentRepo;
 
+    @Autowired
     public EmployeeServiceImpl(EmployeeRepo employeeRepo, DepartmentRepo departmentRepo) {
         this.employeeRepo = employeeRepo;
         this.departmentRepo = departmentRepo;
@@ -32,17 +34,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void saveEmployee(Employee employee) {
-        employeeRepo.save(employee);
+    public Employee saveEmployee(Employee employee) {
+        return employeeRepo.save(employee);
     }
 
     @Override
     @Transactional
-    public void updateEmployee(Employee employee, Long id) {
+    public Employee updateEmployee(Employee employee, Long id) {
         Employee newEmployee = employeeRepo.findById(id).orElseThrow();
         newEmployee.setFirstName(employee.getFirstName());
         newEmployee.setSecondName(employee.getSecondName());
-        employeeRepo.save(newEmployee);
+        return employeeRepo.save(newEmployee);
     }
 
     @Override

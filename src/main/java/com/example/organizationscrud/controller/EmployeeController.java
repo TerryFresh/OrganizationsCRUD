@@ -28,13 +28,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveEmployee")
-    public void saveEmployee(@RequestBody Employee employee){
-        employeeService.saveEmployee(employee);
+    public Employee saveEmployee(@RequestBody Employee employee){
+        return employeeService.saveEmployee(employee);
     }
 
     @PutMapping("/updateEmployee/{id}")
-    public void updateEmployee(@RequestBody Employee employee, @PathVariable Long id){
-        employeeService.updateEmployee(employee, id);
+    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable Long id){
+        return employeeService.updateEmployee(employee, id);
     }
 
     @DeleteMapping("/deleteEmployee/{id}")

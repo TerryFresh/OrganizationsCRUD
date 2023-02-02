@@ -2,6 +2,7 @@ package com.example.organizationscrud.service;
 
 import com.example.organizationscrud.model.Cartel;
 import com.example.organizationscrud.repo.CartelRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ public class CartelServiceImpl implements CartelService {
 
     private final CartelRepo cartelRepo;
 
+    @Autowired
     public CartelServiceImpl(CartelRepo cartelRepo) {
         this.cartelRepo = cartelRepo;
     }
@@ -28,16 +30,16 @@ public class CartelServiceImpl implements CartelService {
 
     @Override
     @Transactional
-    public void saveCartel(Cartel cartel) {
-        cartelRepo.save(cartel);
+    public Cartel saveCartel(Cartel cartel) {
+        return cartelRepo.save(cartel);
     }
 
     @Override
     @Transactional
-    public void updateCartel(Cartel cartel, Long id) {
+    public Cartel updateCartel(Cartel cartel, Long id) {
         Cartel newCartel = cartelRepo.findById(id).orElseThrow();
         newCartel.setName(cartel.getName());
-        cartelRepo.save(newCartel);
+        return cartelRepo.save(newCartel);
     }
 
     @Override
